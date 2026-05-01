@@ -1,0 +1,31 @@
+import camion.*
+import cosas.*
+
+describe "Camion: Carga y descarga." {
+  test "Cargamos a Bee" {
+    camion.cargar(bumblebee)
+    assert.equals([bumblebee], camion.cosas())
+  }
+  test "Ahora sumamos a knightRider" {
+    camion.cargar(bumblebee)
+    camion.cargar(knightRider)
+    assert.equals([bumblebee,knightRider], camion.cosas())
+  }
+  test "Ahora descargamos a Bee" {
+    camion.cargar(bumblebee)
+    camion.cargar(knightRider)
+    assert.equals([bumblebee,knightRider], camion.cosas())
+    camion.descargar(bumblebee)
+    assert.equals([knightRider], camion.cosas())
+  }
+  test "Fallamos al intentar cargar nuevamente a knightRider" {
+    camion.cargar(knightRider)
+    assert.throwsException({ camion.cargar(knightRider) })
+  }
+  test "Fallamos al intentar descargar nuevamente a Bee" {
+    camion.cargar(bumblebee)
+    camion.descargar(bumblebee)
+    assert.throwsException({ camion.descargar(bumblebee) })
+  }
+}
+
