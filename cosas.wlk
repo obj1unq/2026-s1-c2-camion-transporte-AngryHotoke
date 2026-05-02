@@ -35,7 +35,7 @@ object bumblebee {
 	}
   }
   method accidente(){
-	estaTransformadoEnAuto = estaTransformadoEnAuto.negate()
+	estaTransformadoEnAuto = self.estaTransformadoEnAuto().negate()
   }
 }
 object paqueteDeLadrillos {
@@ -90,7 +90,7 @@ object bateriaAntiAerea {
 	}
   }
   method accidente() {
-	tieneMisiles = false
+	self.tieneMisiles(false)
   }
 }
 object residuosRadioactivos {

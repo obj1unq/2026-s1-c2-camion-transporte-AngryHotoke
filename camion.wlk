@@ -1,4 +1,7 @@
 import cosas.*
+import destinos.*
+import rutas.*
+
 
 object camion {
 	const property cosas = []
@@ -61,4 +64,24 @@ object camion {
 	method accidente() {
 	  cosas.forEach({cosa => cosa.accidente()})
 	}
+	method vaciarCamion() {
+	  cosas.clear()
+	}
+	method transportar(destino,camino) {
+		self.validarDestino(destino)
+		self.validarRuta(camino)
+	  destino.guardarCosasDelTransporte(self)
+	  self.vaciarCamion()
+	}
+	method validarDestino(destino) {
+	  if(cosas.any({cosa => destino.cosasAlmacenadas().contains(cosa)})){
+		self.error("En el destino " + destino + " ya se encuentran almacenadas algunas cosas que estan en el camion.")
+	  }
+	}
+	method validarRuta(ruta) {
+	  if(not ruta.condicionesDeRutaCumplidasPor(self)){
+		self.error("El transporte no cumple con las condiciones optimas para circular por la ruta " + ruta + ".")
+	  }
+	}
+
 }
